@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okkhar Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #C9AB81;
+            --secondary-color: #6B5840;
+            --white-color: #FFFFFF;
+            --dark-color: #222222;
+            --light-gray: #F8F8F8;
+            --body-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            background-color: var(--white-color);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.75rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .wrapper {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        /* Navigation Styles */
+        .navigation-wrap {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(201, 171, 129, 0.3);
+            padding: 0.8rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .restaurant-name {
+            font-family: var(--heading-font);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .restaurant-location {
+            font-family: var(--body-font);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--secondary-color);
+        }
+
+        .lang-nav {
+            display: flex;
+            list-style: none;
+            position: absolute;
+            left: 50px;
+        }
+
+        .lang-item {
+            margin: 0 0.5rem;
+        }
+
+        .lang-link {
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .reservation-btn {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.6rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .reservation-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Banner Sections */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .banner-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .locations-info {
+            margin: 2rem 0;
+        }
+
+        .center-btn {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Menu Tabs */
+        .menu-tabs {
+            margin: 2rem 0;
+        }
+
+        .tab-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tab-title h2 {
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .tab-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            border-bottom: 1px solid rgba(201, 171, 129, 0.3);
+            margin-bottom: 3rem;
+        }
+
+        .nav-tabs .nav-link {
+            padding: 0.75rem 1.5rem;
+            margin: 0 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--dark-color);
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-tabs .nav-link.active,
+        .nav-tabs .nav-link:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .tab-content {
+            position: relative;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Menu Grid Layout */
+        .menu-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Starters - 6 items */
+        .starters-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Main Course - 12 items */
+        .main-course-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Desserts - 6 items */
+        .desserts-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Beverages - 9 items */
+        .beverages-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Individual menu item styling */
+        .menu-item {
+            background: var(--white-color);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-content {
+            padding: 1.8rem;
+            text-align: center;
+        }
+
+        .menu-item-content h4 {
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .menu-item-price {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .menu-item-description {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 4rem 0 2rem;
+            color: #ccc;
+        }
+
+        footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white-color);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color) !important;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+        }
+
+        /* Media Queries for Responsive Design */
+        /* 1200px or less */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+            .main-course-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* 991px or less */
+        @media (max-width: 991px) {
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+                line-height: 2.25rem;
+            }
+            .wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            .restaurant-name {
+                font-size: 1.8rem;
+            }
+            .nav-link {
+                font-size: 0.8rem;
+            }
+            .reservation-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.75rem;
+            }
+            .starters-grid,
+            .desserts-grid,
+            .main-course-grid,
+            .beverages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: var(--white-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-item {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            .lang-nav {
+                position: relative;
+                left: 0;
+                margin-bottom: 1rem;
+            }
+            .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* 767px or less */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .starters-grid,
+            .desserts-grid,
+            .main-course-grid,
+            .beverages-grid {
+                grid-template-columns: 1fr;
+            }
+            .menu-item img {
+                height: 220px;
+            }
+        }
+
+        /* 575px or less */
+        @media (max-width: 575px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .banner {
+                min-height: 80vh;
+            }
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+            .restaurant-location {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navigation-wrap">
+        <div class="container">
+            <nav class="navbar">
+                <ul class="lang-nav">
+                    <li class="lang-item"><a href="#" class="lang-link">EN</a></li>
+                    <li class="lang-item"><a href="#" class="lang-link">NL</a></li>
+                </ul>
+                
+                <a href="#" class="navbar-brand">
+                    <div class="restaurant-name">Okkhar</div>
+                    <div class="restaurant-location">Amsterdam</div>
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Menu</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Gallery</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="#" class="reservation-btn">Reservation</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Book a Table</h1>
+            <p>Experience the taste of tradition with a modern twist</p>
+            
+            <div class="locations-info">
+                <p>OKKHAR Restaurant has two branches in Amsterdam: <br><strong>Amsterdam Centrum</strong> and <strong>Amsterdam West</strong>.</p>
+                <p>Please choose the Okkhar Restaurant that is near and convenient to you and make a reservation online now.</p>
+            </div>
+            
+            <div class="center-btn">
+                <a href="#" class="reservation-btn">Reservation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="wrapper">
+        <div class="container">
+            <div class="tab-title">
+                <h2>Our Menu</h2>
+            </div>
+            
+            <!-- Menu Tabs -->
+            <div class="menu-tabs">
+                <ul class="nav-tabs">
+                    <li><button class="nav-link active" data-tab="starters">Starters</button></li>
+                    <li><button class="nav-link" data-tab="main-course">Main Course</button></li>
+                    <li><button class="nav-link" data-tab="desserts">Desserts</button></li>
+                    <li><button class="nav-link" data-tab="beverages">Beverages</button></li>
+                </ul>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Starters Tab -->
+                <div id="starters" class="tab-pane active">
+                    <div class="menu-grid starters-grid">
+                        <!-- 6 Starters Items -->
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bruschetta">
+                            <div class="menu-item-content">
+                                <h4>Classic Bruschetta</h4>
+                                <div class="menu-item-price">$8.95</div>
+                                <div class="menu-item-description">Toasted bread topped with fresh tomatoes, basil, and garlic.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Calamari">
+                            <div class="menu-item-content">
+                                <h4>Crispy Calamari</h4>
+                                <div class="menu-item-price">$12.95</div>
+                                <div class="menu-item-description">Lightly fried squid served with lemon aioli dipping sauce.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1648498265264-3ff78cee21af?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Caprese Salad">
+                            <div class="menu-item-content">
+                                <h4>Caprese Salad</h4>
+                                <div class="menu-item-price">$10.95</div>
+                                <div class="menu-item-description">Fresh mozzarella, tomatoes, and basil with balsamic glaze.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1656522566047-8b0d342c5519?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Stuffed Mushrooms">
+                            <div class="menu-item-content">
+                                <h4>Stuffed Mushrooms</h4>
+                                <div class="menu-item-price">$9.95</div>
+                                <div class="menu-item-description">Baked mushroom caps filled with herb cream cheese and breadcrumbs.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1619221882266-0b5c21551735?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Garlic Bread">
+                            <div class="menu-item-content">
+                                <h4>Garlic Bread</h4>
+                                <div class="menu-item-price">$6.95</div>
+                                <div class="menu-item-description">Oven-baked French bread with garlic butter and herbs.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1579887071180-1b716d3f6ed6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Shrimp Cocktail">
+                            <div class="menu-item-content">
+                                <h4>Shrimp Cocktail</h4>
+                                <div class="menu-item-price">$14.95</div>
+                                <div class="menu-item-description">Chilled jumbo shrimp served with cocktail sauce and lemon.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Course Tab -->
+                <div id="main-course" class="tab-pane">
+                    <div class="menu-grid main-course-grid">
+                        <!-- 12 Main Course Items (showing 6 for brevity) -->
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pasta">
+                            <div class="menu-item-content">
+                                <h4>Spaghetti Carbonara</h4>
+                                <div class="menu-item-price">$18.95</div>
+                                <div class="menu-item-description">Pasta with creamy egg sauce, pancetta, and parmesan.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Steak">
+                            <div class="menu-item-content">
+                                <h4>Ribeye Steak</h4>
+                                <div class="menu-item-price">$32.95</div>
+                                <div class="menu-item-description">12oz grilled ribeye with herb butter and roasted potatoes.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Salmon">
+                            <div class="menu-item-content">
+                                <h4>Grilled Salmon</h4>
+                                <div class="menu-item-price">$24.95</div>
+                                <div class="menu-item-description">Fresh salmon filet with lemon dill sauce and seasonal vegetables.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chicken Parm">
+                            <div class="menu-item-content">
+                                <h4>Chicken Parmesan</h4>
+                                <div class="menu-item-price">$19.95</div>
+                                <div class="menu-item-description">Breaded chicken breast with marinara and melted mozzarella.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Risotto">
+                            <div class="menu-item-content">
+                                <h4>Mushroom Risotto</h4>
+                                <div class="menu-item-price">$18.95</div>
+                                <div class="menu-item-description">Creamy arborio rice with wild mushrooms and parmesan.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1619895092538-128341789043?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Lasagna">
+                            <div class="menu-item-content">
+                                <h4>Classic Lasagna</h4>
+                                <div class="menu-item-price">$17.95</div>
+                                <div class="menu-item-description">Layered pasta with beef ragù, bechamel, and cheese.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desserts Tab -->
+                <div id="desserts" class="tab-pane">
+                    <div class="menu-grid desserts-grid">
+                        <!-- 6 Desserts Items -->
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tiramisu">
+                            <div class="menu-item-content">
+                                <h4>Tiramisu</h4>
+                                <div class="menu-item-price">$8.95</div>
+                                <div class="menu-item-description">Classic Italian dessert with coffee-soaked ladyfingers and mascarpone.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cheesecake">
+                            <div class="menu-item-content">
+                                <h4>New York Cheesecake</h4>
+                                <div class="menu-item-price">$9.95</div>
+                                <div class="menu-item-description">Creamy cheesecake with graham cracker crust and berry compote.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1611329695583-51a049ae3dd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chocolate Cake">
+                            <div class="menu-item-content">
+                                <h4>Molten Chocolate Cake</h4>
+                                <div class="menu-item-price">$10.95</div>
+                                <div class="menu-item-description">Warm chocolate cake with a gooey center and vanilla ice cream.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beverages Tab -->
+                <div id="beverages" class="tab-pane">
+                    <div class="menu-grid beverages-grid">
+                        <!-- 9 Beverages Items (showing 3 for brevity) -->
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Red Wine">
+                            <div class="menu-item-content">
+                                <h4>Red Wine</h4>
+                            <div class="menu-item-price">$9.95 / glass</div>
+                            <div class="menu-item-description">House selection of premium red wines by the glass or bottle.</div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="White Wine">
+                            <div class="menu-item-content">
+                                <h4>White Wine</h4>
+                                <div class="menu-item-price">$8.95 / glass</div>
+                                <div class="menu-item-description">Selection of crisp and refreshing white wines by the glass or bottle.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Craft Beer">
+                            <div class="menu-item-content">
+                                <h4>Craft Beer</h4>
+                                <div class="menu-item-price">$7.95</div>
+                                <div class="menu-item-description">Selection of local and imported craft beers on tap and bottled.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1578329564740-7eedca33c693?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cocktails">
+                            <div class="menu-item-content">
+                                <h4>Signature Cocktails</h4>
+                                <div class="menu-item-price">$12.95</div>
+                                <div class="menu-item-description">Handcrafted specialty cocktails using premium spirits and fresh ingredients.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Espresso">
+                            <div class="menu-item-content">
+                                <h4>Espresso</h4>
+                                <div class="menu-item-price">$3.95</div>
+                                <div class="menu-item-description">Rich and aromatic espresso made from freshly ground coffee beans.</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1531280759782-92e5afe55a5a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fresh Juice">
+                            <div class="menu-item-content">
+                                <h4>Fresh Juices</h4>
+                                <div class="menu-item-price">$5.95</div>
+                                <div class="menu-item-description">Selection of freshly squeezed fruit and vegetable juices.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h4>Okkhar Restaurant</h4>
+                <p>Experience the taste of tradition with a modern twist</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Amsterdam Centrum</h4>
+                    <p>123 Herengracht<br>1015 BS Amsterdam<br>+31 20 555 1234</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Amsterdam West</h4>
+                    <p>456 Kinkerstraat<br>1053 DT Amsterdam<br>+31 20 555 5678</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Friday: 11:00 - 23:00<br>Saturday & Sunday: 10:00 - 00:00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Okkhar Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        
+        menuToggle.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+        
+        // Tab Functionality
+        const tabLinks = document.querySelectorAll('.nav-link');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        
+        tabLinks.forEach(function(tabLink) {
+            tabLink.addEventListener('click', function() {
+                // Remove active class from all tabs
+                tabLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab panes
+                tabPanes.forEach(function(pane) {
+                    pane.classList.remove('active');
+                });
+                
+                // Show the corresponding tab pane
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

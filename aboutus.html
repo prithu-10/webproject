@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okkhar Restaurant - Kathmandu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #C9AB81;
+            --secondary-color: #6B5840;
+            --white-color: #FFFFFF;
+            --dark-color: #222222;
+            --light-gray: #F8F8F8;
+            --body-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+            --header-height: 140px; /* Added this variable to use consistently */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            background-color: var(--white-color);
+            line-height: 1.6;
+            font-weight: 300;
+            padding-top: var(--header-height); /* Add padding to body equal to header height */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.75rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .wrapper {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        /* Navigation Styles */
+        .navigation-wrap {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(201, 171, 129, 0.3);
+            padding: 0.8rem 0;
+            height: var(--header-height); /* Set a fixed height for the header */
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .restaurant-name {
+            font-family: var(--heading-font);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .restaurant-location {
+            font-family: var(--body-font);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--secondary-color);
+        }
+
+        /* Remove underline from logo link */
+        .navbar-brand {
+            text-decoration: none !important;
+        }
+
+        /* Remove underline from restaurant name and location */
+        .restaurant-name,
+        .restaurant-location {
+            text-decoration: none !important;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .reservation-btn {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.6rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .reservation-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About Us Hero */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+        }
+
+        .about-hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About Content */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 4rem 0;
+        }
+
+        .about-image {
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-text h2 {
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-text h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Our Story Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 30px;
+            background-color: var(--light-gray);
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 15px 0 15px 15px;
+            border-color: transparent transparent transparent var(--light-gray);
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 15px 15px 15px 0;
+            border-color: transparent var(--light-gray) transparent transparent;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-date {
+            position: absolute;
+            width: 120px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-date {
+            right: -150px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            left: -150px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Team Section */
+        .team-section {
+            text-align: center;
+            margin: 6rem 0;
+        }
+
+        .team-section h2 {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .team-section h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: var(--light-gray);
+            padding: 2rem;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--primary-color);
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 4rem 0 2rem;
+            color: #ccc;
+        }
+
+        footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white-color);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color) !important;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+        }
+
+        /* Media Queries for Responsive Design */
+        /* 1200px or less */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+        }
+
+        /* 991px or less */
+        @media (max-width: 991px) {
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+                line-height: 2.25rem;
+            }
+            .wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            .restaurant-name {
+                font-size: 1.8rem;
+            }
+            .nav-link {
+                font-size: 0.8rem;
+            }
+            .reservation-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.75rem;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .timeline:before {
+                left: 40px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            .timeline-item:nth-child(odd) .timeline-date,
+            .timeline-item:nth-child(even) .timeline-date {
+                left: 0;
+                right: auto;
+                top: -25px;
+                transform: none;
+            }
+            .timeline-item:nth-child(odd) .timeline-content:after,
+            .timeline-item:nth-child(even) .timeline-content:after {
+                left: -15px;
+                right: auto;
+                border-width: 15px 15px 15px 0;
+                border-color: transparent var(--light-gray) transparent transparent;
+            }
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: var(--white-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-item {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            .lang-nav {
+                position: relative;
+                left: 0;
+                margin-bottom: 1rem;
+            }
+            .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* 767px or less */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .about-hero {
+                min-height: 50vh;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 575px or less */
+        @media (max-width: 575px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+            .restaurant-location {
+                font-size: 0.65rem;
+            }
+            .about-hero {
+                min-height: 40vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navigation-wrap">
+        <div class="container">
+            <nav class="navbar">
+                <ul class="lang-nav">
+                </ul>
+                
+                <a href="mainpage.html" class="navbar-brand">
+                    <div class="restaurant-name">Okkhar</div>
+                    <div class="restaurant-location">Nepal</div>
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="mainpage.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="aboutus.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="menuu.html" class="nav-link">Menu</a></li>
+                        <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                        <li class="nav-item"><a href="contactus.html" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="reservation.html" class="reservation-btn">Reservation</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>Our Story</h1>
+            <p>Discover the passion and tradition behind Okkhar Restaurant</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="wrapper">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="interior.png" alt="Okkhar Restaurant Interior">
+                </div>
+                <div class="about-text">
+                    <h2>Welcome to Okkhar</h2>
+                    <p>Founded in 2010, Okkhar Restaurant brings the authentic flavors of Nepal to the heart of Kathmandu. Our journey began with a simple vision: to create a dining experience that celebrates traditional recipes while embracing modern culinary techniques.</p>
+                    <p>At Okkhar, we believe in the power of food to bring people together. Our chefs meticulously prepare each dish using the finest ingredients, many imported directly from Nepal to ensure authentic flavors.</p>
+                    <p>With two locations in Nepal- Kathmandu- Pokhara we've grown from a small family restaurant to one of the city's most beloved dining destinations, earning recognition for our exceptional cuisine and warm hospitality.</p>
+                    <a href="reservation.html" class="reservation-btn">Reserve a Table</a>
+                </div>
+            </div>
+
+            <!-- Our Story Timeline -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Our Humble Beginnings</h3>
+                        <p>Okkhar started as a small family-owned restaurant in Kathmandu, with just 10 tables and a dream to share our family recipes with the city.</p>
+                    </div>
+                    <div class="timeline-date">2010</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>First Expansion</h3>
+                        <p>Due to popular demand, we expanded our original location and introduced our now-famous lamb kebab to the menu.</p>
+                    </div>
+                    <div class="timeline-date">2014</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>P</h3>
+                        <p>We opened our second location in the heart of Kathmandu, bringing our unique dining experience to a wider audience.</p>
+                    </div>
+                    <div class="timeline-date">2017</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Culinary Recognition</h3>
+                        <p>Okkhar was awarded the [Prestigious Award Name], recognizing our commitment to authentic flavors and exceptional service.</p>
+                    </div>
+                    <div class="timeline-date">2020</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Today & Beyond</h3>
+                        <p>We continue to innovate while staying true to our roots, offering cooking classes and planning to expand our family of restaurants.</p>
+                    </div>
+                    <div class="timeline-date">Present</div>
+                </div>
+            </div>
+
+            <!-- Our Team Section -->
+            <div class="team-section">
+                <h2>Meet Our Team</h2>
+                <p>The passionate individuals who make Okkhar special</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chef Anna">
+                        </div>
+                        <h3>Chef Anna</h3>
+                        <p>Head Chef</p>
+                        <p>With over 15 years of experience, Chef Anna brings traditional family recipes to life with a modern twist.</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Manager David">
+                        </div>
+                        <h3>David</h3>
+                        <p>General Manager</p>
+                        <p>David ensures every guest receives the warm hospitality that Okkhar is known for.</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sommelier Maria">
+                        </div>
+                        <h3>Maria</h3>
+                        <p>Sommelier</p>
+                        <p>Maria curates our exceptional wine list, perfectly pairing each selection with our menu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h4>Okkhar Restaurant</h4>
+                <p>Experience the taste of tradition with a modern twist</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Kathmandu
+                    </h4>
+                    <p>123 Thamel<br>1015 BS Kathmandu<br>+31 20 555 1234</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Pokhara</h4>
+                    <p>456 Bindabasini<br>1053 DT Pokhara<br>+31 20 555 5678</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Friday: 11:00 - 23:00<br>Saturday & Sunday: 10:00 - 00:00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Okkhar Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        
+        menuToggle.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

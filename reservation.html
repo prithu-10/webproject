@@ -1,0 +1,795 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations - Okkhar Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #C9AB81;
+            --secondary-color: #6B5840;
+            --white-color: #FFFFFF;
+            --dark-color: #222222;
+            --light-gray: #F8F8F8;
+            --body-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            background-color: var(--white-color);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.75rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .wrapper {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        /* Navigation Styles */
+        .navigation-wrap {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(201, 171, 129, 0.3);
+            padding: 0.8rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .restaurant-name {
+            font-family: var(--heading-font);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .restaurant-location {
+            font-family: var(--body-font);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--secondary-color);
+        }
+        /* Remove underline from logo link */
+.navbar-brand {
+    text-decoration: none !important;
+}
+
+/* Remove underline from restaurant name and location */
+.restaurant-name,
+.restaurant-location {
+    text-decoration: none !important;
+}
+
+    
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .reservation-btn {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.6rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .reservation-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Reservation Hero */
+        .reservation-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+        }
+
+        .reservation-hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reservation-hero h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Reservation Content */
+        .reservation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin: 4rem 0;
+        }
+
+        .reservation-info {
+            padding-right: 2rem;
+        }
+
+        .reservation-info h2 {
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .reservation-info h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .restaurant-details {
+            margin-top: 3rem;
+        }
+
+        .detail-box {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        .detail-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .testimonial {
+            background-color: var(--light-gray);
+            padding: 2rem;
+            margin-top: 3rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial .customer {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* Reservation Form */
+        .reservation-form-container {
+            background-color: var(--light-gray);
+            padding: 2rem;
+            border-radius: 0;
+        }
+
+        .reservation-form-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .reservation-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 500;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            font-size: 0.95rem;
+            font-family: var(--body-font);
+            background-color: var(--white-color);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            padding: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .policies {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 171, 129, 0.3);
+            font-size: 0.85rem;
+        }
+
+        .policies h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .policy-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .policy-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-list li::before {
+            content: '•';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 4rem 0 2rem;
+            color: #ccc;
+        }
+
+        footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white-color);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color) !important;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+                line-height: 2.25rem;
+            }
+            .wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            .restaurant-name {
+                font-size: 1.8rem;
+            }
+            .reservation-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .reservation-info {
+                padding-right: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: var(--white-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-item {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+           
+            .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .reservation-hero {
+                min-height: 50vh;
+            }
+        }
+
+        @media (max-width: 575px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+            .restaurant-location {
+                font-size: 0.65rem;
+            }
+            .reservation-hero {
+                min-height: 40vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navigation-wrap">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="navbar-brand">
+                    <div class="restaurant-name">Okkhar</div>
+                    <div class="restaurant-location">Amsterdam</div>
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+                        <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="reservation.html" class="reservation-btn">Reservation</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Reservation Hero Section -->
+    <section class="reservation-hero">
+        <div class="reservation-hero-content">
+            <h1>Book a Table</h1>
+            <p>Experience the taste of tradition with a modern twist at Okkhar Restaurant</p>
+        </div>
+    </section>
+
+    <!-- Reservation Content -->
+    <section class="wrapper">
+        <div class="container">
+            <div class="reservation-content">
+                <div class="reservation-info">
+                    <h2>Dine With Us</h2>
+                    <p>We invite you to experience the perfect blend of exquisite cuisine, elegant ambiance, and impeccable service at Okkhar. Our chef creates seasonal menus featuring the finest locally-sourced ingredients, prepared with passion and artistry.</p>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-box">
+                            <div class="icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h3>Locations</h3>
+                                <p><strong>Kathamndu</strong><br>123 Jhamsikhel, 1015 BS Kathmandu</p>
+                                <p><strong>Pokhara</strong><br>456 Lake side, 1053 DT Pokhara</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-box">
+                            <div class="icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h3>Hours</h3>
+                                <p>Monday to Friday: 11:00 - 23:00</p>
+                                <p>Saturday & Sunday: 10:00 - 00:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-box">
+                            <div class="icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h3>Contact</h3>
+                                <p><strong>Centrum:</strong> +977 20 555 1234</p>
+                                <p><strong>West:</strong> +977 20 555 5678</p>
+                                <p><strong>Email:</strong> reservations@okkhar.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <p>"From the moment we walked in, we were treated to an exceptional dining experience. The ambiance was elegant yet comfortable, the service was attentive without being intrusive, and the food was nothing short of extraordinary."</p>
+                        <span class="customer">— Kathmandu Food Guide</span>
+                    </div>
+                </div>
+                
+                <div class="reservation-form-container">
+                    <h2>Reserve Your Table</h2>
+                    
+                    <form class="reservation-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+977 20 123 4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Preferred Location</label>
+                            <select id="location" name="location" required>
+                                <option value="">Select location</option>
+                                <option value="centrum">Kathmandu</option>
+                                <option value="west">Pokhara</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <select id="time" name="time" required>
+                                <option value="">Select a time</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="13:30">1:30 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="14:30">2:30 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="17:30">5:30 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="18:30">6:30 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="19:30">7:30 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="20:30">8:30 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                                <option value="21:30">9:30 PM</option>
+                                <option value="22:00">10:00 PM</option>
+                                <option value="22:30">10:30 PM</option>
+                                <option value="23:00">11:00 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <select id="guests" name="guests" required>
+                                <option value="">Select party size</option>
+                                <option value="1">1 person</option>
+                                <option value="2">2 people</option>
+                                <option value="3">3 people</option>
+                                <option value="4">4 people</option>
+                                <option value="5">5 people</option>
+                                <option value="6">6 people</option>
+                                <option value="7">7 people</option>
+                                <option value="8">8 people</option>
+                                <option value="9">9 people</option>
+                                <option value="10">10 people</option>
+                                <option value="11">11-15 people</option>
+                                <option value="16">16+ people</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="occasion">Special Occasion (Optional)</label>
+                            <select id="occasion" name="occasion">
+                                <option value="">Select an occasion</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="business">Business Meal</option>
+                                <option value="date">Date Night</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="requests">Special Requests (Optional)</label>
+                            <textarea id="requests" name="requests" rows="3" placeholder="Any special requests or dietary requirements?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Reserve Now</button>
+                        
+                        <div class="policies">
+                            <h3>Reservation Policies</h3>
+                            <ul class="policy-list">
+                                <li>Reservations must be made at least 2 hours in advance</li>
+                                <li>For parties larger than 10, please call us directly</li>
+                                <li>We hold your table for 20 minutes past the reservation time</li>
+                                <li>Cancellations must be made at least 4 hours in advance</li>
+                                <li>A credit card may be required for Friday and Saturday reservations</li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h4>Okkhar Restaurant</h4>
+                <p>Experience the taste of tradition with a modern twist</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Kathmandu</h4>
+                    <p>123 Jhamsikhel<br>1015 BS Kathmandu<br>+977 20 555 1234</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Pokhara</h4>
+                    <p>456 Lake side<br>1053 DT Pokhara<br>+977 20 555 5678</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Friday: 11:00 - 23:00<br>Saturday & Sunday: 10:00 - 00:00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Okkhar Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        
+        menuToggle.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+
+        // Set minimum date for reservation (today)
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            const minDate = yyyy + '-' + mm + '-' + dd;
+            
+            document.getElementById('date').min = minDate;
+        });
+    </script>
+</body>
+</html>

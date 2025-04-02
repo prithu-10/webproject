@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food and Resturant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive-style.css">
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+*,
+*:after,
+*:before{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:active,
+:hover,
+:focus{
+    outline: 0 !important;
+    outline-offset: 0;
+}
+
+a,
+a:hover{
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--primary-color) !important;
+}
+
+ul,
+ol {
+   margin: 0;
+   padding: 0; 
+}
+
+
+/* variable define */
+
+:root {
+    --primary-color:#A82C48;
+    --secondary-color: #43121d;
+    --third-color: #f98169;
+    --white-color: #fff;
+    --text-color: #555;
+    --black-color:#000;
+    --primary-font: 'Roboto' , sans-serif;
+    --secondary-font: 'Quicksand' , sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: var(--primary-font);
+    font-size: 100%;
+    font-weight: 400;
+}
+
+/* 
+----------------------
+custom scroller
+---------------------
+*/
+::-webkit-scrollbar{
+    width: 0.625rem;
+}
+
+::-webkit-scrollbar-ttrack{
+    background: var(--white-color);
+}
+
+::-webkit-scrollbar-thumb{
+    background: var(--primary-color);
+}
+
+
+/* custome css design */
+
+h1{
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    color: var(--secondary-color);
+}
+h2{
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-transform: capitalize;
+    font-family: var(--secodary-font);
+    color: var(--secondary-color);
+    line-height: 3rem;
+}
+h4{
+    color: var(--secondary-color);
+    font-family: var(--secondary-font);
+    text-transform: capitalize;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+h5{
+    color: var(--primary-color);
+    text-transform: capitalize;
+    font-family: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+p{
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 400;
+    line-height: 1.75rem;
+    letter-spacing: 1px;
+}
+
+.main-btn{
+    display: inline-block;
+    padding: 0.625rem 1.87rem;
+    line-height: 1.5625rem;
+    background-color: var(--primary-color);
+    border: 0.1875rem solid var(--primary-color);
+    color: var(--white-color);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: 0px 2px 10px -1px rgb(0 0 0 /19%);
+    -webkit-transition: all .4s ease-out 0s;
+    -o-transition: all .4s ease-out 0s;
+    -moz-transition: all .4s ease-out 0s;
+    transition: all .4s ease-out 0s;
+}
+
+.white-btn {
+    padding: 0.625rem 1.875rem;
+    line-height: 25px;
+    background-color: var(--white-color);
+    border: 0.1875rem solid var(--white-color);
+    color: var(--text-color);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: 0px 2px 10px -1px rgb(0 0 0 /19%);
+    -webkit-transition: all .4s ease-out 0s;
+    -o-transition: all .4s ease-out 0s;
+    -moz-transition: all .4s ease-out 0s;
+    transition: all .4s ease-out 0s;
+}
+
+.main-btn:hover{
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.white-btn:hover{
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.wrapper{
+    padding-top: 8.25rem;
+    padding-bottom: 8.25rem;
+}
+.text-content{
+    width: 70%;
+    margin: auto;
+}
+
+.counter-section h2,
+.testimonal-section h2,
+.book-food-text h2{
+    color: var(--white-color);
+}
+
+
+
+/* 
+------------------
+Header design
+-----------------
+*/
+
+.navigation-wrap{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.navigation-wrap .nav-item{
+    padding: 0 0.625rem;
+    transition: all 200ms linear;
+}
+
+.navbar-toggler:focus{
+    outline: unset;
+    border: unset;
+    box-shadow: none;
+}
+.nav-link{
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+.navigation-wrap .main-btn{
+    padding: 0.3125rem 1.4375rem;
+    box-shadow: none;
+    margin-left: 0.625rem;
+}
+
+/* change navbar styling on scroll */
+.navigation-wrap.scroll-on{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white-color);
+    box-shadow: 0 0.125rem 1.75rem 0 rgb(0, 0, 0, 0.09);
+    transition: all .15s ease-in-out 0s;
+}
+
+/* 
+-------------------
+top banner design
+------------------
+ */
+
+.top-banner{
+    width: 100%;
+    background: url('bbbg.jpg') no-repeat center;
+    background-size: cover;
+    padding: 16.875rem 0 9.375rem;
+}
+
+/* 
+----------------------
+counter design
+------------------
+ */
+
+.counter-section{
+    background-color: var(--primary-color);
+    padding: 2.5rem 0;
+}
+
+.counter-section p{
+    color: var(--white-color);
+    text-transform: uppercase;
+}
+
+/* 
+----------------------
+about section
+--------------------
+ */
+
+ .about-section{
+    background: var(--white-color);
+ }
+
+.about-section .card,
+.about-section .card img{
+    border-radius: 0.625rem;
+}
+.about-section .text-sec{
+    padding-left: 2rem;
+}
+
+/* 
+-----------------------
+food type section desing
+-------------------------
+ */
+
+.food-type{
+    padding-top: 3.25rem;
+}
+.food-type ul li{
+    font-size: 1rem;
+    color: var(--text-color);
+    line-height: 32px;
+    position: relative;
+    margin-left: 30px;
+}
+.food-type ul li::before{
+    position: absolute;
+    left: -2.1875rem;
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-family: "Font Awesome 5 Free";
+    content: '\f00c';
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+}
+
+.story-section{
+    width: 100%;
+    height: 28.125rem;
+    background: url('bg-2.jpg') no-repeat center;
+    background-size: cover;
+    padding-top: 100px;
+    text-align: center;
+}
+
+.story-section h2{
+    color: var(--primary-color);
+}
+
+
+/* -----------------------------
+explore food section design
+--------------------------------
+ */
+
+ .explore-food .card{
+    border: none;
+    background-color: transparent;
+    border-radius: 0.9375rem;
+ }
+.explore-food .card img{
+    border-radius: 0.9375rem;
+    object-fit: cover;
+}
+
+.explore-food .card span{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    padding-bottom: 1rem;
+    border-bottom: 0.0625rem solid #eee;
+}
+
+.explore-food .card span del{
+    color: rgb(172, 171, 171);
+    margin-left: 0.5rem;
+}
+
+
+
+/* -----------------------
+testimonial section
+--------------------------
+ */
+
+.testimonial-section{
+    background-color: var(--primary-color);
+}
+.testimonial-section .carousel-item{
+    margin-top: 3rem;
+    padding: 10rem 3.125rem;
+    background-color: var(--white-color);
+    border-radius: 0.9375rem;
+    text-align: center;
+}
+
+.testimonial-section .carousel-caption img{
+    max-width: 5rem;
+    border-radius: 50%;
+    padding: 0.3125rem;
+}
+
+.testimonial-section .carousel-item .carousel-caption p{
+    font-size: 1.1525rem;
+    line-height: 2.0625rem;
+    padding: 0 11% 0.625rem;
+}
+.testimonial-section .carousel-indicators{
+    bottom: -2.8125rem;
+}
+.testimonial-section .carousel-indicators button {
+    width: 15px;
+    height: 15px;
+    outline: none;
+    border-radius: 50%;
+    border: none;
+    margin-right: 1rem;
+    opacity: 0.2;
+}
+
+.testimonial-section .carousel-indicators button.active{
+    opacity: 1;
+}
+
+/* -----------------
+FAQ
+--------------------
+ */
+
+.faq h4 span{
+    color: var(--primary-color);
+    font-size: 1.875rem;
+    margin-right: 0.3125rem;
+}
+
+.book-food-text{
+    width: 100%;
+    background: url('bg-3.jpg') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 0 71.9125px;
+    padding: 4.375rem 0;
+}
+
+/* form control */
+.newsletter{
+    width: 70%;
+    margin: 0 auto;
+}
+.newsletter .form-control{
+    height: 3.225rem;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    border: 0.1875rem solid var(--black-color);
+}
+.newsletter .form-control:hover,
+.newsletter .form-control:focus{
+    outline: none;
+    box-shadow: none;
+    border-color: var(--primary-color);
+}
+
+/* footer */
+
+.footer{
+    background: var(--primary-color);
+}
+
+.footer .footer-link{
+    font-size: 1rem;
+    color: var(--white-color);
+    padding: 0 1.875rem;
+}
+
+.footer .footer-link:hover{
+    color: var(--white-color) !important;
+}
+.footer-social{
+    margin-top: 2rem;
+}
+.footer a i{
+    font-size: 1.5rem;
+    color: var(--white-color);
+    padding: 0 1rem;
+}
+@media (max-width:1024){
+    /* about section */
+}
+
+@media (max-width: 991px){
+    /* custome classes */
+    .text-content{
+        width: 100%;
+    }
+
+    /* navbar brand */
+
+    .navigation-wrap .navbar-brand img{
+        height: 3.8125rem;
+    }
+    .navigation-wrap{
+        text-align: center;
+        background-color: var(--white-color);
+    }
+    .navigation-wrap .nav-link{
+        line-height: 1.875rem;
+    }
+
+    /* Banner Design */
+    .top-banner{
+        padding: 9.375rem 0 9.375rem;
+    }
+
+    /* Carousel Design */
+}
+
+@media (max-width: 767px){
+    /* custome css */
+    h1{
+        font-size: 2.8rem;
+    }
+    h2{
+        font-size: 2rem;
+        line-height: 2.0625rem;
+    }
+    /* top banner */
+    .top-banner{
+        padding: 10.875rem 0 9.375rem;
+    }
+
+    /* story section */
+    .story-section{
+        height: auto;
+        padding: 3rem 0;
+    }
+
+    /* carousel design */
+    .testimonial-section .carousel-item{
+        padding: 11rem 3.125rem;
+    }
+    /* newsletter */
+    .newsletter{
+        width: 75%;
+    }
+    .newsletter .main-btn{
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    /* footer link */
+    .footer .footer-link,
+    .footer a i{
+        padding: 0 0.7rem;
+    }
+}
+
+@media (max-width:330px)
+{
+    .testimonial-section .carousel-item {
+        padding: 13rem 3.125rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- header navbar design -->
+    <header>
+        <nav class="navbar navbar-expand-lg navigation-wrap">
+            <div class="container">
+              <a class="navbar-brand" href="#"><img src="l.jpg" alt="site logo"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fas fa-stream navbar-toggler-icon"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#about">Our Story</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#explore-food">Explore Food</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#testimonal">Reviews</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#faq">FAQ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#about">Contact</a>
+                  </li>
+                  <li><button class="main-btn">FIND A TABLE</button></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <!-- section 1 top banner -->
+
+    <section id="home">
+        <div class="container-fluid px=0 top-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <h1>Savor the Flavors of Nepal</h1>
+                        <p>"Our fine dining Nepali restaurant remains dedicated to upholding the highest standards of quality and excellence that our patrons have come to expect. We take pride in offering an exquisite selection of authentic Nepali cuisine, unparalleled hospitality, and a serene ambiance that reflects the rich cultural heritage of Nepal. Each dish is crafted with precision and passion, ensuring a dining experience that is both memorable and deeply rooted in tradition."</p>
+                        <div class="mt-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 2 counter design -->
+    <!-- <section id="counter">
+        <section class="counter-section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+                        <h2><span id="count1"></span>+</h2>
+                        <p>SAVING</p>
+                    </div>
+                    <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+                        <h2><span id="count2"></span>+</h2>
+                        <p>PHOTOS</p>
+                    </div>
+                    <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+                        <h2><span id="count3"></span>+</h2>
+                        <p>ROCKETS</p>
+                    </div>
+                    <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+                        <h2><span id="count4"></span>+</h2>
+                        <p>GLOBES</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section> -->
+
+    <!-- section 3 about -->
+    <section id="about">
+        <div class="about-section wrapper">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-12 mb-lg-9 mb-5">
+                        <div class="card border-0">
+                            <img src="priv.jpg" alt="about section image" class="img-fluid mt-5">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 text-sec">
+                        <h2>We take pride in crafting authentic flavors with the finest ingredients. </h2>
+                        <p>Experience the rich culinary heritage of Nepal, where tradition meets modern elegance. Our chefs curate exquisite dishes using premium, locally sourced ingredients to bring you an unforgettable dining experience.</p>
+                        <button class="main-btn mt-3">Learn More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container food-type">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-md-12 text-sec mb-lg-0 mb-5">
+                        <h2>Discover the artistry of Nepali cuisine</h2>
+                        <p>At our restaurant, every dish is meticulously handcrafted, blending traditional techniques with contemporary presentation. From aromatic spices to farm-fresh produce, we ensure every bite tells a story of Nepal’s vibrant culture and flavors.</p>
+                        <!-- <ul class="list-unstyled py-3">
+                            <li>Organic Ingredients</li>
+                            <li>Fine dining experience</li>
+                            <li></li>
+                        </ul> -->
+                        <button class="main-btn mt-3">ABOUT US</button>
+                    </div>
+                    <div class="col-lg-7 col-md-12">
+                        <div class="card border-0">
+                            <img src="finedining.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 3 story -->
+    <section id="story">
+        <div class="story-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-content">
+                            <h2>"Exquisite flavors, impeccable service, and an unforgettable experience—where every meal is a masterpiece.".</h2>
+                            <p>Embark on a culinary journey through Nepal’s rich flavors, reimagined with a modern touch. From timeless Himalayan recipes to contemporary gourmet creations, our menu is a celebration of authenticity and innovation.</p>
+                            <button class="main-btn mt-3">Read More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 4 explore food -->
+    <section id="explore-food">
+        <div class="explore-food wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-content text-center">
+                            <h2>Experience Nepal</h2>
+                            <H1><p>BRINGING PEOPLE TOGETHER</p></H1>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
+                        <div class="card">
+                            <img src="aalu.jpg" alt="" class="img-fluid">
+                            <div class="pt-3">
+                                <h4>Furaula</h4>
+                                <p>Time: 20 - 25 Minutes | serves: 1</p>
+                                <span>Rs 749.00 </span>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
+                        <div class="card">
+                            <img src="golomolo.jpg" alt="" class="img-fluid">
+                            <div class="pt-3">
+                                <h4>Golomolo Mushroom</h4>
+                                <p>Time: 10 - 15 Minutes | serves: 1</p>
+                                <span>Rs 1059.00 </span>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
+                        <div class="card">
+                            <img src="kataifi.jpg" alt="" class="img-fluid">
+                            <div class="pt-3">
+                                <h4>Kataifi Delight</h4>
+                                <p>Time: 15 - 25 Minutes | serves: 1</p>
+                                <span>Rs. 560</del></span>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 5 testimonal -->
+    <section id="testimonial">
+        <div class="wrapper testimonial-section">
+            <div class="container text-center">
+                <div class="text-center pb-4">
+                    <h2>Testimonial</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-10 offset-lg-1">
+                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" arial-current="true" aria-label="slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <div class="carousel-caption">
+                                <img src="nn.png" >
+                                <p>"An absolute gem of a restaurant! The fusion of traditional Nepali flavors with modern culinary techniques was nothing short of spectacular"</p>
+                                <h5>Aarav Shrestha</h5>
+                                </div>
+                              </div>
+                              <div class="carousel-item">
+                                <div class="carousel-caption">
+                                <img src="nn.png" >
+                                <p>The ambiance was warm, elegant, and true to Nepal’s rich heritage. A must-visit for anyone looking to experience Nepali cuisine in a whole new light!</p>
+                                <h5>Swagat Gautam</h5>
+                                </div>
+                              </div>
+                              <div class="carousel-item">
+                                <div class="carousel-caption">
+                                <img src="nn.png" >
+                                <p>The Mustang Trout with Spiced Butter Sauce was delicate yet bursting with Himalayan aromas, and the Kataifi Yomari Delight was a masterpiece—crispy, creamy, and perfectly balanced with the sweetness of chaku and the tartness of pomegranate. </p>
+                                <h5>Shreyash Ghale</h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  section 6 FAQ -->
+    <section id="faq">
+        <div class="faq wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center pb-4">
+                            <h2>Frequently Asked Questions</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="col-sm-6 mb-4">
+                        <h4><span>~</span>What type of cuisine do you serve?</h4>
+                            <p>We specialize in authentic Nepali fine dining, blending traditional flavors with modern culinary techniques.</p>
+                    </div>
+
+                    <div class="col-sm-6 mb-4">
+                        <h4><span>~</span>Do you offer vegetarian and vegan options?</h4>
+                        <p>Yes, we have a variety of vegetarian and vegan dishes inspired by Nepali cuisine.
+
+                            .</p>
+                    </div>
+
+                    <div class="col-sm-6 mb-4">
+                        <h4><span>~</span>Do you accommodate dietary restrictions?</h4>
+                        <p>Absolutely! Let us know your dietary needs, and we’ll be happy to customize your meal.</p>
+                    </div>
+
+                    <div class="col-sm-6 mb-4">
+                        <h4><span>~</span>Do you host private events?</h4>
+                        <p>Yes, we offer private dining and event bookings. Contact us for more details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 7 book-food -->
+
+<section id="book0food">
+    <div class="book-food">
+        <div class="container-fluid book-food-text">
+            <div class="row text-center">
+                <div class="col-lg-9 col-md-12">
+                    <h2>Baked fresh daily by bakers with passion.</h2>
+                </div>
+                <div class="col-lg-3 col-md-12 mt-lg-0 mt-4">
+                    <button class="main-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- section 8 newsletter -->
+<section id="newsletter">
+    <div class="newsletter wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="text-content text-center pb-4">
+                        <h2>Hurry up! Subscribe our newsletter
+                            and get 25% off
+                        </h2>
+                        <p>Stay updated with exclusive offers, new menu launches, and special dining experiences.</p>
+                    </div>
+                    <form action="" class="newsletter">
+                        <div class="row">
+                            <div class="col-md-8 col-12">
+                                <input type="email" name="email" class="form-control" placeholder="Email Address Here">
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <button class="main-btn" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- section 9 footer -->
+
+<section id="fotter">
+    <div class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="" class="footer-link">Register</a>
+                    <a href="" class="footer-link">Forum</a>
+                    <a href="" class="footer-link">Affiliate</a>
+                    <a href="" class="footer-link">FAQ</a>
+                    <div class="footer-social pt--4 text-center">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-dribbble"></i></a>
+                        <a href=""><i class="fa fa-linkedin"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="footer-copy">
+                        <div class="copy-right text-center pt-5">
+                            <p class="text-light">© 2025. Okkhar. All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <script src="https://kit.fontawesome.com/04111552cb.js" crossorigin="anonymous">
+        //active navbar
+let nav = document.querySelector(".navigation-wrap");
+window.onscroll  = function ()
+{
+    if (document.documentElement.scrollTop > 20)
+    {
+        nav.classList.add("scroll-on");
+    }
+    else{
+        nav.classList.remove("scroll-on");
+    }
+}
+
+// nav hide
+
+let navbar= document.querySelectorAll('.nav-link');
+let navcollapse = document.querySelector('.navbar-collapse.collapse');
+navbar.forEach(function(a){
+    a.addEventListener("click" ,function(){
+        navcollapse.classList.remove("show");
+    })
+})
+
+
+
+// counter design
+
+document.addEventListener("DOMContentLoaded",() =>{
+    function counter (id, start, end, duration)
+    {
+        let obj = document.getElementById(id),
+        current = start,
+        range = end - start,
+        increment = end > start ? 1 : -1,
+        step = Math.abs(Math.floor(duration / range)),
+        timer = setInterval(() => {
+            current += increment;
+            obj.textContent = current;
+            if(current == end)
+            {
+                clearInterval(timer);
+            }
+        }, step);
+    }
+    counter("count1", 0, 1263, 3000);
+    counter("count2", 50, 1000, 3000);
+    counter("count3", 40, 1754, 3000);
+    counter("count4", 0, 953, 3000);
+
+})
+    </script>   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- own js file -->
+    <script src="js/main.js"></script>
+</body>
+</html>

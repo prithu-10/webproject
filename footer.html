@@ -1,0 +1,269 @@
+<html>
+    <head>
+        <style>
+            :root {
+            --primary-color: #C9AB81;
+            --secondary-color: #6B5840;
+            --white-color: #FFFFFF;
+            --dark-color: #222222;
+            --light-gray: #F8F8F8;
+            --body-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            background-color: var(--white-color);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.75rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .wrapper {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+            /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 4rem 0 2rem;
+            color: #ccc;
+        }
+
+        footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white-color);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color) !important;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+                line-height: 2.25rem;
+            }
+            .wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            .restaurant-name {
+                font-size: 1.8rem;
+            }
+            .reservation-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .reservation-info {
+                padding-right: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: var(--white-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-item {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+           
+            .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .reservation-hero {
+                min-height: 50vh;
+            }
+        }
+
+        @media (max-width: 575px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+            .restaurant-location {
+                font-size: 0.65rem;
+            }
+            .reservation-hero {
+                min-height: 40vh;
+            }
+        }
+        </style>
+    </head>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h4>Okkhar Restaurant</h4>
+                <p>Experience the taste of tradition with a modern twist</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Kathmandu</h4>
+                    <p>123 Jhamsikhel<br>1015 BS Kathmandu<br>+977 20 555 1234</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Pokhara</h4>
+                    <p>456 Lake side<br>1053 DT Pokhara<br>+977 20 555 5678</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Friday: 11:00 - 23:00<br>Saturday & Sunday: 10:00 - 00:00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Okkhar Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okkhar Restaurant - Kathmandu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #C9AB81;
+            --secondary-color: #6B5840;
+            --white-color: #FFFFFF;
+            --dark-color: #222222;
+            --light-gray: #F8F8F8;
+            --body-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+            --header-height: 140px; /* Added this variable to use consistently */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            background-color: var(--white-color);
+            line-height: 1.6;
+            font-weight: 300;
+            padding-top: var(--header-height); /* Add padding to body equal to header height */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.75rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .wrapper {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        /* Navigation Styles */
+        .navigation-wrap {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(201, 171, 129, 0.3);
+            padding: 0.8rem 0;
+            height: var(--header-height); /* Set a fixed height for the header */
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .restaurant-name {
+            font-family: var(--heading-font);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .restaurant-location {
+            font-family: var(--body-font);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--secondary-color);
+        }
+
+        /* Remove underline from logo link */
+        .navbar-brand {
+            text-decoration: none !important;
+        }
+
+        /* Remove underline from restaurant name and location */
+        .restaurant-name,
+        .restaurant-location {
+            text-decoration: none !important;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .reservation-btn {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.6rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .reservation-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Gallery Hero */
+        .gallery-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+        }
+
+        .gallery-hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-hero h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Gallery Content */
+        .gallery-section {
+            margin: 4rem 0;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-title h2 {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .gallery-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            aspect-ratio: 1/1;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Gallery Categories */
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-category {
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gallery-category:hover,
+        .gallery-category.active {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 4rem 0 2rem;
+            color: #ccc;
+        }
+
+        footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white-color);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color) !important;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+        }
+
+        /* Lightbox Overrides */
+        .lightbox .lb-image {
+            border: 5px solid var(--white-color);
+        }
+
+        .lightbox .lb-nav a.lb-prev,
+        .lightbox .lb-nav a.lb-next {
+            opacity: 1;
+        }
+
+        .lightbox .lb-close {
+            opacity: 1;
+        }
+
+        /* Media Queries for Responsive Design */
+        /* 1200px or less */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+        }
+
+        /* 991px or less */
+        @media (max-width: 991px) {
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+                line-height: 2.25rem;
+            }
+            .wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            .restaurant-name {
+                font-size: 1.8rem;
+            }
+            .nav-link {
+                font-size: 0.8rem;
+            }
+            .reservation-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.75rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: var(--white-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-item {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            .lang-nav {
+                position: relative;
+                left: 0;
+                margin-bottom: 1rem;
+            }
+            .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* 767px or less */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .gallery-hero {
+                min-height: 50vh;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 575px or less */
+        @media (max-width: 575px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+            .restaurant-location {
+                font-size: 0.65rem;
+            }
+            .gallery-hero {
+                min-height: 40vh;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Navigation -->
+     <header class="navigation-wrap">
+        <div class="container">
+            <nav class="navbar">
+                
+                <a href="mainpage.html" class="navbar-brand">
+                    <div class="restaurant-name">Okkhar</div>
+                    <div class="restaurant-location">Kathmandu</div>
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="mainpage.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="aboutus.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="menuu.html" class="nav-link">Menu</a></li>
+                        <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                        <li class="nav-item"><a href="contactus.html" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="reservation.html" class="reservation-btn">Reservation</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="gallery-hero-content">
+            <h1>Our Gallery</h1>
+            <p>A visual journey through the Okkhar dining experience</p>
+        </div>
+    </section>
+
+    <!-- Gallery Content -->
+    <section class="wrapper">
+        <div class="container">
+            <div class="gallery-section">
+                <div class="gallery-title">
+                    <h2>Discover Okkhar</h2>
+                    <p>Explore our restaurant ambiance, signature dishes, and special moments</p>
+                </div>
+
+                <!-- Gallery Categories -->
+                <div class="gallery-categories">
+                    <button class="gallery-category active" data-filter="all">All</button>
+                    <button class="gallery-category" data-filter="food">Food</button>
+                    <button class="gallery-category" data-filter="interior">Interior</button>
+                    <button class="gallery-category" data-filter="events">Events</button>
+                    <button class="gallery-category" data-filter="team">Team</button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="gallery-grid">
+                    <!-- Food Images -->
+                    <div class="gallery-item" data-category="food">
+                        <a href="yomari.png" data-lightbox="gallery" data-title="Signature Dish - Chef's Special">
+                            <img src="yomari.png" alt="Signature Dish">
+                            <div class="gallery-caption">Signature Dish - Chef's Special</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="food">
+                        <a href="tandoori.jpg" data-lightbox="gallery" data-title="Gourmet Appetizer">
+                            <img src="tandoori.jpg" alt="Gourmet Appetizer">
+                            <div class="gallery-caption">Gourmet Appetizer</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="food">
+                        <a href="momo.jpg" data-lightbox="gallery" data-title="Artisanal Dessert">
+                            <img src="momo.jpg" alt="Artisanal Dessert">
+                            <div class="gallery-caption">Artisanal Dessert</div>
+                        </a>
+                    </div>
+                    
+                    <!-- Interior Images -->
+                    <div class="gallery-item" data-category="interior">
+                        <a href="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Main Dining Area">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Main Dining Area">
+                            <div class="gallery-caption">Main Dining Area</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="interior">
+                        <a href="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Private Dining Room">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Private Dining Room">
+                            <div class="gallery-caption">Private Dining Room</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="interior">
+                        <a href="interior.png" data-lightbox="gallery" data-title="Bar Area">
+                            <img src="interior.png" alt="Bar Area">
+                            <div class="gallery-caption">Bar Area</div>
+                        </a>
+                    </div>
+                    
+                    <!-- Events Images -->
+                    <div class="gallery-item" data-category="events">
+                        <a href="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Wine Tasting Event">
+                            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wine Tasting Event">
+                            <div class="gallery-caption">Wine Tasting Event</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="events">
+                        <a href="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Chef's Table Experience">
+                            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chef's Table Experience">
+                            <div class="gallery-caption">Chef's Table Experience</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="events">
+                        <a href="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Anniversary Celebration">
+                            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Anniversary Celebration">
+                            <div class="gallery-caption">Anniversary Celebration</div>
+                        </a>
+                    </div>
+                    
+                    <!-- Team Images -->
+                    <div class="gallery-item" data-category="team">
+                        <a href="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Our Chef in Action">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Our Chef in Action">
+                            <div class="gallery-caption">Our Chef in Action</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="team">
+                        <a href="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Friendly Service">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Friendly Service">
+                            <div class="gallery-caption">Friendly Service</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="team">
+                        <a href="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Wine Expert">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wine Expert">
+                            <div class="gallery-caption">Wine Expert</div>
+                        </a>
+                    </div>
+                    
+                    <!-- Additional Food Images -->
+                    <div class="gallery-item" data-category="food">
+                        <a href="fish.png" data-lightbox="gallery" data-title="Breakfast Special">
+                            <img src="fish.png" alt="Breakfast Special">
+                            <div class="gallery-caption">Breakfast Special</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="food">
+                        <a href="buff.png" data-lightbox="gallery" data-title="Seasonal Ingredients">
+                            <img src="buff.png" alt="Seasonal Ingredients">
+                            <div class="gallery-caption">Seasonal Ingredients</div>
+                        </a>
+                    </div>
+                    <div class="gallery-item" data-category="food">
+                        <a href="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" data-lightbox="gallery" data-title="Tasting Menu">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tasting Menu">
+                            <div class="gallery-caption">Tasting Menu</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h4>Okkhar Restaurant</h4>
+                <p>Experience the taste of tradition with a modern twist</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Kathmandu</h4>
+                    <p>123 Jhamsikhel<br>1015 BS Kathmandu<br>+977 20 555 1234</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Pokhara</h4>
+                    <p>456 Lake side<br>1053 DT Pokhara<br>+977 20 555 5678</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Friday: 11:00 - 23:00<br>Saturday & Sunday: 10:00 - 00:00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Okkhar Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        
+        menuToggle.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+
+        // Gallery Filter
+        $(document).ready(function(){
+            $('.gallery-category').click(function(){
+                $('.gallery-category').removeClass('active');
+                $(this).addClass('active');
+                
+                const filter = $(this).data('filter');
+                if(filter === 'all') {
+                    $('.gallery-item').show();
+                } else {
+                    $('.gallery-item').hide();
+                    $(`.gallery-item[data-category="${filter}"]`).show();
+                }
+            });
+        });
+
+        // Lightbox configuration
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'positionFromTop': 100,
+            'albumLabel': "Image %1 of %2"
+        });
+    </script>
+</body>
+</html>

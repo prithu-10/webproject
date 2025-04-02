@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okkhar Restaurant - Kathmandu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #C9AB81;
+            --secondary-color: #6B5840;
+            --white-color: #FFFFFF;
+            --dark-color: #222222;
+            --light-gray: #F8F8F8;
+            --body-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+            --header-height: 140px; /* Added this variable to use consistently */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            background-color: var(--white-color);
+            line-height: 1.6;
+            font-weight: 300;
+            padding-top: var(--header-height); /* Add padding to body equal to header height */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.75rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .wrapper {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        /* Navigation Styles */
+        .navigation-wrap {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(201, 171, 129, 0.3);
+            padding: 0.8rem 0;
+            height: var(--header-height); /* Set a fixed height for the header */
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .restaurant-name {
+            font-family: var(--heading-font);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .restaurant-location {
+            font-family: var(--body-font);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--secondary-color);
+        }
+
+        /* Remove underline from logo link */
+        .navbar-brand {
+            text-decoration: none !important;
+        }
+
+        /* Remove underline from restaurant name and location */
+        .restaurant-name,
+        .restaurant-location {
+            text-decoration: none !important;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .reservation-btn {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.6rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .reservation-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: var(--white-color);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .about-image {
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-text h2 {
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-text h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Story Section */
+        .story-section {
+            background-color: var(--light-gray);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Explore Food Section */
+        .explore-food {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .explore-food h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .food-card {
+            background-color: var(--white-color);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .food-image {
+            overflow: hidden;
+        }
+
+        .food-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .food-card:hover .food-image img {
+            transform: scale(1.05);
+        }
+
+        .food-info {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .food-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .food-info p {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .food-price {
+            font-weight: 600;
+            color: var(--secondary-color);
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* Testimonial Section */
+         /* Testimonial Section */
+         .testimonial-section {
+            background-color: var(--light-gray);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .testimonial-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-family: var(--heading-font);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Carousel Container */
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Carousel Track */
+        .testimonial-track {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Carousel Slides */
+        .testimonial-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .testimonial-item {
+            flex: 0 0 100%;
+            background-color: var(--white-color);
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-family: var(--body-font);
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: var(--primary-color);
+            font-family: var(--body-font);
+        }
+
+        /* Navigation Arrows */
+        .testimonial-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--white-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-arrow:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .prev-arrow {
+            left: -20px;
+        }
+
+        .next-arrow {
+            right: -20px;
+        }
+
+        /* Dots Navigation */
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(201, 171, 129, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .testimonial-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .prev-arrow {
+                left: 0;
+            }
+            
+            .next-arrow {
+                right: 0;
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+        }
+
+        .faq-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .faq-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-item h3 span {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Book Table Section */
+        .book-table {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .book-table-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .book-table h2 {
+            color: var(--white-color);
+            margin-bottom: 0;
+        }
+
+        .book-btn {
+            border: 1px solid var(--white-color);
+            color: var(--white-color);
+            background-color: transparent;
+            padding: 0.6rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .book-btn:hover {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 4rem 0 2rem;
+            color: #ccc;
+        }
+
+        footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white-color);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color) !important;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+        }
+
+        /* Media Queries for Responsive Design */
+        /* 1200px or less */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+        }
+
+        /* 991px or less */
+        @media (max-width: 991px) {
+            :root {
+                --header-height: 70px; /* Adjust header height for smaller screens */
+            }
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+                line-height: 2.25rem;
+            }
+            .wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            .restaurant-name {
+                font-size: 1.8rem;
+            }
+            .nav-link {
+                font-size: 0.8rem;
+            }
+            .reservation-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.75rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .food-grid, 
+            .faq-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: var(--header-height); /* Use the variable here */
+                left: 0;
+                right: 0;
+                background-color: var(--white-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-item {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* 767px or less */
+        @media (max-width: 767px) {
+            :root {
+                --header-height: 65px; /* Further adjust header height for mobile */
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .hero-section {
+                min-height: 60vh;
+            }
+            .food-grid, 
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            .book-table-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        /* 575px or less */
+        @media (max-width: 575px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+            .restaurant-location {
+                font-size: 0.65rem;
+            }
+            .hero-section {
+                min-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navigation-wrap">
+        <div class="container">
+            <nav class="navbar">
+                
+                <a href="mainpage.html" class="navbar-brand">
+                    <div class="restaurant-name">Okkhar</div>
+                    <div class="restaurant-location">Kathmandu</div>
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="mainpage.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="aboutus.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="menuu.html" class="nav-link">Menu</a></li>
+                        <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                        <li class="nav-item"><a href="contactus.html" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="reservation.html" class="reservation-btn">Reservation</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Savor the Flavors of Nepal</h1>
+                <p>"Our fine dining Nepali restaurant remains dedicated to upholding the highest standards of quality and excellence that our patrons have come to expect. We take pride in offering an exquisite selection of authentic Nepali cuisine, unparalleled hospitality, and a serene ambiance that reflects the rich cultural heritage of Nepal. Each dish is crafted with precision and passion, ensuring a dining experience that is both memorable and deeply rooted in tradition."</p>
+                <a href="reservation.html" class="reservation-btn">Reserve a Table</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="wrapper">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="priv.jpg" alt="About Okkhar" class="img-fluid">
+                </div>
+                <div class="about-text">
+                    <h2>We take pride in crafting authentic flavors with the finest ingredients.</h2>
+                    <p>Experience the rich culinary heritage of Nepal, where tradition meets modern elegance. Our chefs curate exquisite dishes using premium, locally sourced ingredients to bring you an unforgettable dining experience.</p>
+                    <a href="aboutus.html" class="reservation-btn">About us</a>
+                </div>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Discover the artistry of Nepali cuisine</h2>
+                    <p>At our restaurant, every dish is meticulously handcrafted, blending traditional techniques with contemporary presentation. From aromatic spices to farm-fresh produce, we ensure every bite tells a story of Nepal's vibrant culture and flavors.</p>
+                    <a href="gallery.html" class="reservation-btn">Learn more</a>
+                </div>
+                <div class="about-image">
+                    <img src="finedining.jpg" alt="Nepali Cuisine Artistry" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <h2>"Exquisite flavors, impeccable service, and an unforgettable experience—where every meal is a masterpiece."</h2>
+                <p>Embark on a culinary journey through Nepal's rich flavors, reimagined with a modern touch. From timeless Himalayan recipes to contemporary gourmet creations, our menu is a celebration of authenticity and innovation.</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Food Section -->
+    <section class="explore-food wrapper">
+        <div class="container">
+            <h2>Experience Nepal</h2>
+            <h3>BRINGING PEOPLE TOGETHER</h3>
+            
+            <div class="food-grid">
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="aalu.jpg" alt="Furaula" class="img-fluid">
+                    </div>
+                    <div class="food-info">
+                        <h3>Furaula</h3>
+                        <p>Time: 20 - 25 Minutes | serves: 1</p>
+                        <span class="food-price">Rs 749.00</span>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="golomolo.jpg" alt="Golomolo Mushroom" class="img-fluid">
+                    </div>
+                    <div class="food-info">
+                        <h3>Golomolo Mushroom</h3>
+                        <p>Time: 10 - 15 Minutes | serves: 1</p>
+                        <span class="food-price">Rs 1059.00</span>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="kataifi.jpg" alt="Kataifi Delight" class="img-fluid">
+                    </div>
+                    <div class="food-info">
+                        <h3>Kataifi Delight</h3>
+                        <p>Time: 15 - 25 Minutes | serves: 1</p>
+                        <span class="food-price">Rs. 560</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <h2>What Our Guests Say</h2>
+            
+            <div class="testimonial-carousel">
+                <!-- Navigation Arrows -->
+                <button class="testimonial-arrow prev-arrow" id="prevBtn">&#10094;</button>
+                <button class="testimonial-arrow next-arrow" id="nextBtn">&#10095;</button>
+                
+                <!-- Testimonial Track -->
+                <div class="testimonial-track">
+                    <div class="testimonial-slides" id="testimonialSlides">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-item">
+                            <p class="testimonial-text">"The dining experience was exceptional. The flavors were perfectly balanced and the presentation was a work of art."</p>
+                            <p class="testimonial-author">- Swagat Gautam</p>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-item">
+                            <p class="testimonial-text">"An unforgettable culinary journey. The attention to detail and service were impeccable."</p>
+                            <p class="testimonial-author">- Shreyash Ghale</p>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-item">
+                            <p class="testimonial-text">"The atmosphere complements the exquisite menu perfectly. A true gem in the city's dining scene."</p>
+                            <p class="testimonial-author">- Sampurna Poudyal</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dots Navigation -->
+                <div class="testimonial-dots" id="dotsContainer"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section wrapper">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3><span>~</span>What type of cuisine do you serve?</h3>
+                    <p>We specialize in authentic Nepali fine dining, blending traditional flavors with modern culinary techniques.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><span>~</span>Do you offer vegetarian and vegan options?</h3>
+                    <p>Yes, we have a variety of vegetarian and vegan dishes inspired by Nepali cuisine.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><span>~</span>Do you accommodate dietary restrictions?</h3>
+                    <p>Absolutely! Let us know your dietary needs, and we'll be happy to customize your meal.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><span>~</span>Do you host private events?</h3>
+                    <p>Yes, we offer private dining and event bookings. Contact us for more details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h4>Okkhar Restaurant</h4>
+                <p>Experience the taste of tradition with a modern twist</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Kathmandu</h4>
+                    <p>123 Jhamsikhel<br>1015 BS Kathmandu<br>+977 20 555 1234</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Pokhara</h4>
+                    <p>456 Lake side<br>1053 DT Pokhara<br>+977 20 555 5678</p> 
+                </div>
+                <div class="col-lg-4">
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Friday: 11:00 - 23:00<br>Saturday & Sunday: 10:00 - 00:00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Okkhar Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        
+        menuToggle.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const slidesContainer = document.getElementById('testimonialSlides');
+            const slides = document.querySelectorAll('.testimonial-item');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('dotsContainer');
+            
+            // Variables
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            
+            // Create dots
+            for (let i = 0; i < slideCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.dataset.index = i;
+                dot.addEventListener('click', function() {
+                    goToSlide(parseInt(this.dataset.index));
+                });
+                dotsContainer.appendChild(dot);
+            }
+            
+            // Get all dots after creation
+            const dots = document.querySelectorAll('.dot');
+            
+            // Function to go to a specific slide
+            function goToSlide(index) {
+                // Update position
+                slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                // Update current index
+                currentIndex = index;
+            }
+            
+            // Previous button click
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                goToSlide(currentIndex);
+            });
+            
+            // Next button click
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                goToSlide(currentIndex);
+            });
+            
+            // Auto-rotate slides (optional)
+            let autoRotate = setInterval(function() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                goToSlide(currentIndex);
+            }, 5000);
+            
+            // Stop auto-rotation on user interaction
+            const carouselElements = [slidesContainer, prevBtn, nextBtn, dotsContainer];
+            carouselElements.forEach(element => {
+                element.addEventListener('mouseenter', () => clearInterval(autoRotate));
+                element.addEventListener('mouseleave', () => {
+                    autoRotate = setInterval(function() {
+                        currentIndex = (currentIndex + 1) % slideCount;
+                        goToSlide(currentIndex);
+                    }, 5000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
